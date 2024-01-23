@@ -1,0 +1,28 @@
+body{
+    background-color:#fcbe7e;
+    display: flex;
+    justify-content: center;
+    min-height: 200vh;
+}
+
+.wrapper2{
+    background-color:#046f87;
+    color: #fff;
+    width: 210px;
+    height: 280px;
+    border-radius: 30px;
+}
+
+.log_form{
+    padding: 20px 20px;
+}
+.inp_inf{
+    border-radius: 10px;
+}
+.reg_button{
+    display: block;
+    margin: 10px auto;
+    width: 70px;
+    height: 30px;
+    background-color:#fcbe7e;
+}

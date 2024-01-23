@@ -1,0 +1,79 @@
+body{
+    background-color: #046f87;
+}
+.task_text{
+    text-align: center;
+    color: #d5bda9;
+}
+.text_about{
+    line-height: 50px;
+    size: 40px;
+    color:rgb(0, 0, 0);
+}
+.add_btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("/images/bx-plus.svg");
+    background-color:#fcbe7e;
+}
+.add_btn:hover{
+    background-color: #f69432;
+}
+.second_back{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    margin: 30px 20px 20px 20px;
+    background-color:#fcbe7e;
+}
+.elem_note{
+    background-color:#542c44;
+    width: auto;
+    height: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.txt_fnt{
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    width: auto;
+    left: 40px;
+    color:#d5bda9;
+    top: -8px;
+}
+.check_deal{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 20px;
+    bottom: 5px;
+    top: 2px;
+}
+.delete_btn{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 80px;
+    bottom: 5px;
+    border-radius: 15px;
+    background-image: url('/images/bx-x-circle.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color:#fcbe7e;
+}
+.delete_btn:hover{
+    background-color:#f69432;
+}
