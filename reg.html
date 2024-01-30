@@ -5,25 +5,45 @@
     <title>Registration</title>
 </head>
 <body>
-    <script
-  src="https://code.jquery.com/jquery-3.7.1.js"
-  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-  crossorigin="anonymous"></script>
+    <script src="jquery-3.7.1.js"></script>
+
     <div class="wrapper2">
-        <form action="" method="post" class="log_form">
+        <div class="log_form">
             <div class="input_block_email">
                 <p>Inter your email</p>
-                <input class="inp_inf" type="text" >
+                <input class="inp_inf" id="inp_email" type="text" >
             </div>
             <div class="input_block_login">
                 <p>Make your login</p>
-                <input class="inp_inf" type="text" >
+                <input class="inp_inf" id="inp_login" type="text" >
             </div>
             <div class="input_block_pass">
                 <p>Make your password</p>
-                <input class="inp_inf" type="password">
+                <input class="inp_inf" id="inp_pas" type="password">
             </div>
-            <button class="reg_button" name="reg_button"><font color="#fff">Confirm</font></button>
-        </form>
+            <button type="button" class="reg_button" type="button" id="reg_button"><font color="#fff">Confirm</font></button>
+        </div>
+    <script>
+        document.getElementById('reg_button').onclick = function(){
+            let data = {
+                'email': document.getElementById('inp_email').value,
+                'login': document.getElementById('inp_login').value,
+                'password': document.getElementById('inp_pas').value,
+            }
+            $.ajax({
+                type: 'POST',
+                url: 'php_scr/regist.php',
+                data: data,
+                success: function(mes){
+                    console.info(mes);
+                    if(mes['message'] == 'true' && mes['message2'] == 'true'){
+                        window.location.replace('mainpage.html');
+                    }
+                    
+                },
+                dataType: 'json'
+            });
+        }
+    </script>
     </div>
 </body>

@@ -77,3 +77,19 @@ body{
 .delete_btn:hover{
     background-color:#f69432;
 }
+/* .save_btn{
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    border-radius: 15px;
+    background-color:#fcbe7e;
+    background-image: url('/images/bxs-save.svg');
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    background-position-x: center;
+} */
+.save_btn:hover{
+    background-color:#f69432;
+}

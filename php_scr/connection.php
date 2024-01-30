@@ -45,7 +45,7 @@ class DB_Connection
     //Создание для нового пользователя таблицы с его задачами. Имя таблицы = логин пользователя
     function crNewTableTasks($login)
     {
-        $res = pg_query($this->con_db, 'create table '.$login.'(id serial primary key, task_text character(70), checked boolean)');
+        $res = pg_query($this->con_db, 'create table '.$login.'(id serial primary key, task_text character(70), checked character(6))');
         if ($res) {
             return true;
         }
@@ -58,10 +58,18 @@ class DB_Connection
         $arr_res = pg_fetch_all($returned);
         return $arr_res;
     }
-    //удаление задачи
+    //Удаление задачи
     function del_task($login, $text_of_task){
         $res = pg_query($this->con_db, "delete from ".$login." where task_text = '".$text_of_task."'");
         if ($res){
+            return true;
+        }
+        return false;
+    }
+    //Создание задачи
+    function create_task($login, $text_for_task){
+        $res = pg_query($this->con_db, "insert into '.$login.' values('.$text_for_task.', 'false')");
+        if($res){
             return true;
         }
         return false;

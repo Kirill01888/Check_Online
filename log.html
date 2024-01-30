@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/style_log.css">
     <title>Registration or Log In</title>
-    
 </head>
+
 <body>
-    <!-- <script
-  src="https://code.jquery.com/jquery-3.7.1.js"
-  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-  crossorigin="anonymous"></script> -->
-<div class="wrapper">
-    <form action="" method="post" class="log_form">
-        <div class="input_block_log">
-            <p>Inter your login</p>
-            <input class="inp_inf" type="text" id="log">
-        </div>
-        <div class="input_block_pass">
-            <p>Inter your password</p>
-            <input class="inp_inf" type="password" id="pas">
-        </div>
-        <button class="log_button" onclick="clk();">Confirm</button>
+    <script src="jquery-3.7.1.js"></script>
+
+    <div class="wrapper">
+        <div class="log_form">
+            <div class="input_block_log">
+                <p>Inter your login</p>
+                <input class="inp_inf" type="text" id="log">
+            </div>
+            <div class="input_block_pass">
+                <p>Inter your password</p>
+                <input class="inp_inf" type="password" id="pas">
+            </div>
+            <button class="log_button" id="log_button" type="">Confirm</button>
             <p>Or you can reg into Blocknote Online</p>
             <a href="reg.html" color="blue">Registration</a>
-    </form>
-    
-</div>
-</div>
+        </div>
+        <script>
+            document.getElementById("log_button").onclick = function() {
+                let data = {
+                    'login': document.getElementById('log').value,
+                    'password': document.getElementById('pas').value
+                }
+                console.log(data);
+                let res = '';
+                $.ajax({
+                    type: 'POST',
+                    url: 'php_scr/login.php',
+                    data: data,
+                    success: function(msg) {
+                        res = msg['message'];
+                        if (res === 'true') {
+                            window.location.replace('mainpage.html');
+                        }
+                    },
+                    dataType: 'json'
+                });
+            };
+        </script>
+
+    </div>
+    </div>
 </body>
 </html>

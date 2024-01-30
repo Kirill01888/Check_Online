@@ -5,14 +5,146 @@
   <title>Check Online</title>
 </head>
 <body>
-  <script
-  src="https://code.jquery.com/jquery-3.7.1.js"
-  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-  crossorigin="anonymous"></script>
+  <script src="jquery-3.7.1.js"></script>
+  <script src="scripts/script.js"></script>
   <h2 class="task_text">Your tasks:</h2>
-  <div class="second_back" id="back">
-    </div>
-<button class="add_btn" id="add_button" type="sybmit" onclick="app_elem();"></button>
-    <script src="scripts/script.js"></script>
 
+  <div class="second_back" id="back"></div>
+  <button
+    class="add_btn"
+    id="add_button"
+    type="sybmit"
+    onclick="app_elem();"
+  ></button>
+  <!-- <button class="save_btn" id="save_btn" type="button" value="Save" onclick="save();"></button> -->
+
+  <script>
+    $(document).ready(function () {
+      let set = {" get_log": "1" };
+      $.ajax({
+        type: "POST",
+        data: set,
+        url: "php_scr/readf.php",
+        //Чтение логина из файла
+        success: function (message) {
+          let res = { login: message["message"] };
+          console.info(res);
+          //Загрузка списка заданий из базы данных
+          $.ajax({
+            type: "POST",
+            url: "php_scr/load_tasks.php",
+            data: res,
+            success: function (mes) {
+              let arr = mes["message"];
+              //Создание разметки
+              load_from_db_tasks(arr);
+            },
+            dataType: "json",
+          });
+        },
+        dataType: "json",
+      });
+    });
+    let count_btns = 1;
+
+    //Функция по созданию элемента, вызывается нажатием кнопки add_btn
+    function app_elem() {
+      let result = prompt("Enter task", "");
+      let appDiv = document.createElement("div");
+      let dv_in1 = document.createElement("div");
+      let dv_in2 = document.createElement("div");
+      let dv_in3 = document.createElement("div");
+
+      putDiv = document.querySelector('[class="second_back"]');
+      putDiv.appendChild(appDiv);
+      appDiv.setAttribute("class", "elem_note");
+
+      putElemP = document.querySelector('[class="elem_note"]:last-child');
+
+      putElemP.appendChild(dv_in1);
+      let text = document.createElement("h3");
+      dv_in1.appendChild(text);
+      text.setAttribute("class", "txt_fnt");
+      text.textContent = result;
+
+      putElemP.appendChild(dv_in2);
+      let check = document.createElement("input");
+      dv_in2.appendChild(check);
+      check.setAttribute("class", "check_deal");
+      check.setAttribute("type", "checkbox");
+
+      putElemP.appendChild(dv_in3);
+      let btn = document.createElement("button");
+      dv_in3.appendChild(btn);
+      btn.setAttribute("class", "delete_btn");
+      btn.setAttribute("id", "btn" + count_btns);
+      btn.setAttribute("onclick", "delete_task();");
+      count_btns += 1;
+
+      let to_set = { "get_log": "1" };
+      $.ajax({
+        type: "POST",
+        data: to_set,
+        url: "php_scr/readf.php",
+        //Чтение логина из файла
+        success: function (message) {
+          let login_f = { login: message["message"] };
+          console.info(login_f);
+          console.log(result);
+          let log_and_text ={ 'login':login_f , 'text_for_task':result };
+          //Загрузка списка заданий из базы данных
+          $.ajax({
+            type: "POST",
+            url: "php_scr/create.php",
+            data: log_and_text,
+            success: function (mes) {
+              console.log(result);
+              console.log(mes);
+              let arr = mes["message"];
+              //Создание разметки
+              console.info(arr);
+            },
+            dataType: "json",
+          });
+        },
+        dataType: "json",
+      });
+    }
+
+    //Удаление задания со страницы, вызывается нажатием кнопки delete_btn
+function delete_task() {
+  let id = event.target.id;
+  let btn_id = document.getElementById(id);
+  let par_for_btn = btn_id.parentElement;
+  let par_for_div = par_for_btn.parentElement;
+  let text = par_for_div.querySelector('.txt_fnt').textContent;
+  let to_set = { "get_log": "1" };
+      $.ajax({
+        type: "POST",
+        data: to_set,
+        url: "php_scr/readf.php",
+        //Чтение логина из файла
+        success: function (message) {
+          let login_f = { login: message["message"] };
+          let log_and_text ={ 'login':login_f , 'text_of_task':text };
+          //Загрузка списка заданий из базы данных
+          $.ajax({
+            type: "POST",
+            url: "php_scr/delete.php",
+            data: log_and_text,
+            success: function (mes) {
+              console.log(mes);
+              let arr = mes["message"];
+              //Создание разметки
+              console.info(arr);
+            },
+            dataType: "json",
+          });
+        },
+        dataType: "json",
+      });
+  
+  par_for_div.remove();
+}
+  </script>
 </body>

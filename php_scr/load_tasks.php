@@ -12,7 +12,5 @@ if (isset($_POST['login'])){
 }else{
     $response['message'] = 'can not get list of tasks';
 }
-
 echo json_encode($response);
-
 ?>
